@@ -1,44 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router,Route,Link, NavLink, Switch } from 'react -router-dom'
+import Home from './Home';
+import About from './About';
+import Contact from './Contact';
+import Blog from './Blog';
 
-class Learnreactprops extends React.Component
-{
-  constructor()
-  {
-    super();
-    this.state={value:"welcome to 10decoder"}
-  }
-  componentWillMount()
-  {
-    alert("welcome on board");
-  }
-
-  render()
-
-{
-  return <div> 
-    <h1> {this.state.value} </h1>
-    <br/>
-    <button type="button" onClick={this.changevalue}>change color</button>
-    </div>
-   }
-   changevalue = () =>
-   {
-     this.setState({value:"we grow together"});
-   }
-   componentDidMount()
-   {
-     setTimeout(() =>{
-        this.setState({value:"have good future"})},5000)
-   }
-   componentWillUpdate()
-   {
-     alert("welcome on our team");
-   }
-componentDidUpdate()
-{
-  document.getElementById("mydiv").innerHTML="new member is added"+this.state.value;
-}
-
-}
-ReactDOM.render(<Learnreactprops />,document.getElementById('root'));  
+const routing = (
+  <Router>
+    <div>
+    <h1>10decoder Welcomes You</h1>
+    <Route path="/" component={Home} />
+    <Route path="/" component={About} />
+    <Route path="/" component={Contact} />
+    <Route path="/" component={Blog} />
+  </div>
+  </Router>
+)
+ReactDOM.render(routing,document.getElementById('root'));
