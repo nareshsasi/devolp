@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState,  useEffect} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-      <h1>welcome to my first react app </h1>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import MaterialTable from 'material-table'
 
-export default App;
+
+  function App( ) {
+const [data, setData] = useState([])
+const columns = [
+  {title: "ID", field: "id"},
+  {title: "Name", field: "name"},
+  {title: "Email", field: "email"},
+  
+]
+
+
+
+useEffect(()=> {
+  fetch("https://jsonplaceholder.typicode.com/users")
+
+
+  .then(response=>response.json())
+  .then(response=>{
+
+    console.log(response)
+
+    setData(response)})
+  
+},[])
+    return (
+      <div className="App">
+ <h1>Welcome all</h1>
+ <MaterialTable title="Employee Details"
+ data={data}
+ columns={columns}
+ />
+ 
+
+      </div>
+    )
+  }
+
+
+
+export default App 
