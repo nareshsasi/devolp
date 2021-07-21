@@ -1,20 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router,Route,Link, NavLink, Switch } from 'react -router-dom'
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
-import Blog from './Blog';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-const routing = (
-  <Router>
-    <div>
-    <h1>10decoder Welcomes You</h1>
-    <Route path="/" component={Home} />
-    <Route path="/" component={About} />
-    <Route path="/" component={Contact} />
-    <Route path="/" component={Blog} />
-  </div>
-  </Router>
-)
-ReactDOM.render(routing,document.getElementById('root'));
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
