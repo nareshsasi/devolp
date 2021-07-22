@@ -1,74 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import TablePagination from '@material-ui/core/TablePagination';
-
-import MaterialTable from 'material-table';
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement, isLogged } from "./actions";
 
 function App() {
+  const counter = useSelector((state) => state.counter);
+  const logged = useSelector((state) => state.login);
+  const dispatch = useDispatch();
 
-  const [data, setData] = useState([])
-  
-  const [page, setPage] = React.useState(2);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  let signin_status = "";
+  if (logged === false) {
+    signin_status = "sign_in";
+  } else {
+    signin_status = "sign_out";
+  }
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-  const columns = [
-    { title: "ID", field: "id" },
-   
-    { title: "Name", field: "name" },
-    { title: "Email", field: "email" },
-    { title: "Body", field: "body" },
-  
-  ]
-  useEffect(() => {
-    
-    fetch("https://jsonplaceholder.typicode.com/comments")
-      .then(resp => resp.json())
-      .then(resp => {
-        setData(resp)
-      })
-  }, [])
   return (
     <div className="App">
-      
+      <h1>Counter : {counter}</h1>
 
-      
-   
-<MaterialTable
-data={data}
-columns={columns}
-options={{
-  actionsColumnIndex: -1,
-  selection: true,
-  exportButton: true,
-  showFirstLastPageButtons: true,
-  pageSize: 5,
-  onPageChange:'true',
-                    padding: 'dense',
-                    pageSizeOptions: [5, 20, 50]
-}}
-
-/>
-<TablePagination 
-      component="div"
-      
-      count={500}
-      page={page}
-      onPageChange={handleChangePage}
-      rowsPerPage={rowsPerPage}
-      onRowsPerPageChange={handleChangeRowsPerPage}
-  />
-    
+      <button onClick={() => dispatch(increment())}>Increment</button>
+      <button onClick={() => dispatch(decrement())}>Decrement</button>
+      <button onClick={() => dispatch(isLogged())}> {signin_status}</button>
+      {logged ? (
+        <p>This is a valuable information </p>
+      ) : (
+        <h1>Please login to see the content</h1>
+      )}
     </div>
   );
 }
 
 export default App;
-
