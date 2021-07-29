@@ -1,13 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
 
-class About extends React.Component {
-    render() {
-        return (
-            <div>
-            <h1>we grow and grow together</h1>
-            </div>
-        )
-    }
-}
+const About = () => {
+  return (
+    <div className="container mt-5">
+      <div className="jumbotron">
+        <p className="lead">
+          This is React Contact Management System application with Routing using FireBase
+        </p>
+      </div>
+    </div>
+  );
+};
+
 export default About;

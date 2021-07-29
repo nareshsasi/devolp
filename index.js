@@ -1,11 +1,25 @@
-import isLoggedReducer from "./isLogged";
-import counterReducer from "./counter";
+  
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import "antd/dist/antd.css";
+import store from "./redux/store";
+import { Provider } from "react-redux";
+import reportWebVitals from "./reportWebVitals";
 
-import { createStore, combineReducers } from "redux";
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+    <Provider store={store}>
+    <App />
+    </Provider>
+     
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 
-const store = combineReducers({
-  login: isLoggedReducer,
-  counter: counterReducer,
-});
 
-export default store;
+reportWebVitals();

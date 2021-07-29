@@ -1,30 +1,26 @@
-import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement, isLogged } from "./actions";
+import "./App.css";
+import { Switch, Route } from "react-router-dom";
+import ListRecord from "./components";
+import AddEdit from "./components/AddEdit";
+import Error from "./components/Error";
+import Header from "./components/Header";
+import View from "./components/View";
+import About from "./components/About";
 
 function App() {
-  const counter = useSelector((state) => state.counter);
-  const logged = useSelector((state) => state.login);
-  const dispatch = useDispatch();
-
-  let signin_status = "";
-  if (logged === false) {
-    signin_status = "sign_in";
-  } else {
-    signin_status = "sign_out";
-  }
-
   return (
     <div className="App">
-      <h1>Counter : {counter}</h1>
-
-      <button onClick={() => dispatch(increment())}>Increment</button>
-      <button onClick={() => dispatch(decrement())}>Decrement</button>
-      <button onClick={() => dispatch(isLogged())}> {signin_status}</button>
-      {logged ? (
-        <p>This is a valuable information </p>
-      ) : (
-        <h1>Please login to see the content</h1>
-      )}
+      <Header />
+        <Switch>
+          <Route exact path="/" component={ListRecord} />
+          <Route exact path="/add" component={AddEdit} />
+          <Route exact path="/view/:id" component={View} />
+          <Route exact path="/update/:id" component={AddEdit} />
+          <Route exact path="/about" component={About} />
+          <Route path="*" component={Error} />
+        </Switch>
+      
+      {/* </div> */}
     </div>
   );
 }
