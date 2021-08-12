@@ -1,28 +1,21 @@
-import "./App.css";
-import { Switch, Route } from "react-router-dom";
-import ListRecord from "./components";
-import AddEdit from "./components/AddEdit";
-import Error from "./components/Error";
-import Header from "./components/Header";
-import View from "./components/View";
-import About from "./components/About";
+import { ChatEngine } from 'react-chat-engine';
+import LoginForm from './components/LoginForm';
+import './App.css';
+import ChatFeed from './components/ChatFeed';
 
-function App() {
+
+  
+const App = () => {
+  if (!localStorage.getItem('username')) return <LoginForm />;
   return (
-    <div className="App">
-      <Header />
-        <Switch>
-          <Route exact path="/" component={ListRecord} />
-          <Route exact path="/add" component={AddEdit} />
-          <Route exact path="/view/:id" component={View} />
-          <Route exact path="/update/:id" component={AddEdit} />
-          <Route exact path="/about" component={About} />
-          <Route path="*" component={Error} />
-        </Switch>
-      
-      {/* </div> */}
-    </div>
+    <ChatEngine
+    height="100vh"
+    projectID="
+    f1c29fe6-9885-4397-b772-f96ea5334dbe"
+    userName="rajkumar"
+    userSecret="12345"
+    renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
+    />
   );
 }
-
 export default App;
